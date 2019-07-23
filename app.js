@@ -44,6 +44,12 @@ class UI {
     rollNumber.value = '';
   }
 
+  deleteStudent(target) {
+    if (target.className === 'delete') {
+      target.parentElement.parentElement.remove();
+    }
+  }
+
 };
 
 
@@ -80,6 +86,13 @@ document.querySelector("#book-form").addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
+// Event listener for deleting student
+document.querySelector("#student-list").addEventListener('click', (e) => {
+  const ui = new UI();
+  ui.deleteStudent(e.target);
+  ui.alertMessage("Student Deleted!", "success");
+  e.preventDefault();
+});
 
 
 
