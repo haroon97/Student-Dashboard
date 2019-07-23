@@ -38,6 +38,12 @@ class UI {
     console.log(alert);
   }
 
+  clearFields(firstName, lastName, rollNumber) {
+    firstName.value = '';
+    lastName.value = '';
+    rollNumber.value = '';
+  }
+
 };
 
 
@@ -45,9 +51,14 @@ class UI {
 // Event Listener for adding student
 document.querySelector("#book-form").addEventListener('submit', (e) => {
   // Form Inputs
-  const firstNameInput = document.querySelector("#fname").value;
-  const lastNameInput = document.querySelector("#lname").value;
-  const rollNumberInput = document.querySelector("#rollNo").value;
+
+  let firstName = document.querySelector("#fname");
+  let lastName = document.querySelector("#lname");
+  let rollNumber = document.querySelector("#rollNo");
+
+  let firstNameInput = firstName.value;
+  let lastNameInput = lastName.value;
+  let rollNumberInput = rollNumber.value;
 
   // Instanriate student
   const student = new Student(firstNameInput, lastNameInput, rollNumberInput);
@@ -62,6 +73,8 @@ document.querySelector("#book-form").addEventListener('submit', (e) => {
     ui.addStudent(student);
     ui.alertMessage("Student Added!", "success");
   }
+
+  ui.clearFields(firstName, lastName, rollNumber);
   
   // Preventing default form behaviour
   e.preventDefault();
