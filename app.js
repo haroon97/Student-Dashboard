@@ -20,6 +20,24 @@ class UI {
     `;
     list.appendChild(row);
   }
+
+  alertMessage(message, className) {
+    // selecting container parent
+    const container = document.querySelector(".container");
+    // creating element
+    const alert = document.createElement("p");
+    alert.className = className;
+    alert.appendChild(document.createTextNode(message));
+    // grabbing form element
+    const form = document.querySelector("#book-form");
+    container.insertBefore(alert, form);
+    // Timeout method for removing alert message
+    setTimeout(() => {
+      alert.remove();
+    }, 2000);
+    console.log(alert);
+  }
+
 };
 
 
@@ -38,7 +56,12 @@ document.querySelector("#book-form").addEventListener('submit', (e) => {
   const ui = new UI();
 
   // Add student
-  ui.addStudent(student);
+  if (firstNameInput === '' || lastNameInput === '' || rollNumberInput === '') {
+    ui.alertMessage("Fields cannot be empty!", "error");
+  } else {
+    ui.addStudent(student);
+    ui.alertMessage("Student Added!", "success");
+  }
   
   // Preventing default form behaviour
   e.preventDefault();
